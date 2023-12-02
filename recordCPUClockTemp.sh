@@ -50,7 +50,6 @@ while getopts 'n:i:t:' opt; do
 	fi
 	echo The temperature and CPU frequency will be measured every $intervalTime seconds for $totalTime seconds.;
 	echo This are $totalDays days, $totalHours hours, $totalMinutes minutes and $totalSeconds seconds.;
-	echo During that time a total of $totalIntervals measurings will be recorded.;
       fi
       ;;
   esac
@@ -58,6 +57,7 @@ done
 
 if [ $totalTime -ne 0 ]; then
   totalIntervals=$(($totalTime / $intervalTime + 1))
+  echo During that time a total of $totalIntervals measurings will be recorded.;
 fi
 
 # Here the measurement starts
