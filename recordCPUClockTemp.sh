@@ -56,14 +56,14 @@ while getopts 'n:i:t:' opt; do
 done
 
 if [ $totalTime -ne 0 ]; then
-  totalIntervals=$(($totalTime / $intervalTime + 1))
-  echo During that time a total of $totalIntervals measurings will be recorded.;
+  totalIntervals=$(($totalTime / $intervalTime - 1))
+  echo During that time a total of $(($totalIntervals + 1)) measurings will be recorded.;
 fi
 
 # Here the measurement starts
 date >> $logFileName;
 sensors >> $logFileName;
-mpstat -P ALL >> $logFileName;
+mpstat -P ALL $intervalTime 1 | tail -n 66 >> $logFileName;
 sleep $intervalTime;
 
 while [ $totalIntervals -ne 0 ];
@@ -71,7 +71,6 @@ do
   echo "__________"$'\n'$'\n' >> $logFileName;
   date >> $logFileName;
   sensors >> $logFileName;
-  mpstat -P ALL >> $logFileName;
-  sleep $intervalTime;
+  mpstat -P ALL $intervalTime 1 | tail -n 66 >> $logFileName;
   ((totalIntervals=totalIntervals-1));
 done
