@@ -13,15 +13,13 @@ Scripts for managing test runs on machines
 ### An example of the param.txt looks like the following:
 
 ### The required and optional parameters for the script:
- - **-i [dir to snipets]**
+ - **-i [directory to snipets]**
  - **-n [nr. of testruns]**
- - **-c [available CPU-cores]**
 
 ### The script then does the following:
  - It creates an input and output folder inside the 00_vorlage
  - It copies the input snipets inside the input folder
  - It copies the 00_vorlage folder and names it 1 2 3 etc.
- - It adjusts the param.txt by setting
 
 
 ## startTestruns
