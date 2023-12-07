@@ -24,7 +24,7 @@ Scripts for managing test runs on machines
  - It adjusts the param.txt by setting
 
 
-## createFolders
+## startTestruns
 
 ### This script requires a certain folder structure.
 
