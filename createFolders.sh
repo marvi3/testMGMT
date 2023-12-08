@@ -1,4 +1,3 @@
-
 # This part is evaluating the given arguments
 
 inputDir="../x_in_corpus_javascript"
@@ -30,10 +29,15 @@ while getopts 'n:i:' opt; do
     esac
 done
 
+
 # The next part reads in the folders and sub-folders
 
 shopt -s nullglob
 directories=(*/)
+
+
+# The next part creates the folders for each instance
+
 for dir in "${directories[@]}"
 do
     curdir=$(pwd);
