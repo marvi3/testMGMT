@@ -41,3 +41,5 @@ Scripts for managing test runs on machines
  - It opens a new screen session and starts all the windows with the respective commands.
  - It adjusts the param.txt by setting the right core for the _taskset -c_.
  - It adjusts the param.txt by setting the start time of the test-run.
+ - It copies the command line that is needed to start the SUT
+ - It starts the SUT
