@@ -10,7 +10,8 @@ Scripts for managing test runs on machines
  - Inside this SUT folder each fuzzer has to have an own subfolder with a unique name.
  - Inside this fuzzer folder a folder with the name 00_vorlage has to exist.
  - Inside this 00_volage folder a file with the build and execution instructions called params.txt has to exist as well as all necessary binaries.
-   - The sample file params.txt has more lines than required in order to run this script. The extra information stored in it are however advised to provide to make the evaluation easier. The only required line is the one that starts with taskset.
+   - The sample file params.txt has more lines than required in order to run this script. The only required line is the one that starts with taskset.
+     It is however advised to also store the extra information to make the evaluation easier.
 
 
 ### An example of the params.txt looks like the following:
