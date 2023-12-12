@@ -71,7 +71,7 @@ fi
 
 # The next part:
 # - creates the screen windows
-# - changes the param.txt file at the CPU used and adds the starting time
+# - changes the params.txt file at the CPU used and adds the starting time
 # - copies the command line to start the SUT
 # - starts the SUT
 
