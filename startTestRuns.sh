@@ -66,12 +66,12 @@ if [[ $((${#directories[@]} * $nrTestRuns)) -gt $(( ${#cpuCoresList[@]} )) ]]
 then
     echo You want to run $((${#directories[@]} * $nrTestRuns)) testruns but have only provided a list of ${#cpuCoresList[@]} available cpu cores with the -c option.;
     echo Please add more available cpu cores.;
-    exit 1; 
-fi 
+    exit 1;
+fi
 
 # The next part:
 # - creates the screen windows
-# - changes the param.txt file at the CPU used and adds the starting time
+# - changes the params.txt file at the CPU used and adds the starting time
 # - copies the command line to start the SUT
 # - starts the SUT
 
@@ -82,9 +82,9 @@ do
         if ! screen -list | grep -q "$sutName"; then
             cd "$dir""$run";
             # sed -i -e "s/\taskset\ -c\ [[:digit:]]*/${cpuCoresList[0]}/" .params.txt;
-            sed -i -e "s/taskset\ -c\ [[:digit:]]*/taskset\ -c\ ${cpuCoresList[$curExecution]}/" params.txt;
+            sed -i -e "s/taskset\ -c\ [[:digit:]]*/taskset\ -c\ ${cpuCoresList[$curExecution]}/" "params.txt";
             datum=$(date +"%d.%m.%Y %H:%M");
-            sed -i -e "s/started:.*/started:\ $datum/" "/params.txt";
+            sed -i -e "s/started:.*/started:\ $datum/" "params.txt";
             runCommand="";
             while read line
             do
@@ -96,7 +96,8 @@ do
             echo The script of "$dir""$run" will run on the core "${cpuCoresList[$curExecution]}" and execute $runCommand.;
             curExecution=$((curExecution + 1));
             screen -S "$sutName" -d -m;
-            screen -S "$sutName" -X exec $runCommand;
+#            screen -S "$sutName" -X stuff $'ls\n';
+            screen -S "$sutName" -X stuff $"${runCommand}\n";
             cd ../../;
         else
             sed -i -e "s/taskset\ -c\ [[:digit:]]*/taskset\ -c\ ${cpuCoresList[$curExecution]}/" "$dir""$run""/params.txt";
@@ -115,7 +116,7 @@ do
             screen -S "$sutName" -X chdir "../../""$dir""$run";
             screen -S "$sutName" -X screen;
             # screen -S "$sutName" -X exec pwd;cd h
-            screen -S "$sutName" -X exec $runCommand;
+            screen -S "$sutName" -X stuff $"${runCommand}\n";
         fi
     done
 done

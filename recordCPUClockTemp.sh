@@ -64,7 +64,6 @@ fi
 date >> $logFileName;
 sensors >> $logFileName;
 mpstat -P ALL $intervalTime 1 | tail -n 66 >> $logFileName;
-sleep $intervalTime;
 
 while [ $totalIntervals -ne 0 ];
 do
