@@ -62,14 +62,29 @@ fi
 
 # Here the measurement starts
 date >> $logFileName;
+echo "" >> $logFileName;
 sensors >> $logFileName;
+free -g >> $logFileName;
+echo "" >> $logFileName;
 mpstat -P ALL $intervalTime 1 | tail -n 66 >> $logFileName;
 
 while [ $totalIntervals -ne 0 ];
 do
-  echo "__________"$'\n'$'\n' >> $logFileName;
+  echo "__________"$'\n\n\n' >> $logFileName;
   date >> $logFileName;
+  echo "" >> $logFileName;
   sensors >> $logFileName;
-  mpstat -P ALL $intervalTime 1 | tail -n 66 >> $logFileName;
+  free -g >> $logFileName;
+  echo "" >> $logFileName;
+  mpstat -P ALL $intervalTime 1 | tail -n 66 | sed s/Durchschn/D/ >> $logFileName;
   ((totalIntervals=totalIntervals-1));
+  
+  # echo "__________"$'\n\n\n' >> $logFileName;
+  # date >> $logFileName;
+  # echo "" >> $logFileName;
+  # sensors | sed 's/Adapter: PCI adapter//' | sed 's/(low  = -273.1°C, high = +65261.8°C)//' | sed 's/Tccd//' | sed 's/Sensor/S/' | sed 's/Composite/C/' | sed 's/k10temp-pci-00c3//' >> $logFileName;
+  # free -g >> $logFileName;
+  # echo "" >> $logFileName;
+  # mpstat -P ALL $intervalTime 1 | tail -n 66 | sed s/Durchschn/D/ | sed 's/,00/,/g' >> $logFileName;
+  # ((totalIntervals=totalIntervals-1));
 done
